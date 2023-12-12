@@ -29,7 +29,7 @@ public class RickAndMortyService {
         List<RickAndMortyCharacter> characters = new ArrayList<>();
         for (RickAndMortyResult result : Objects.requireNonNull(response).results()) {
             characters.add(
-                    new RickAndMortyCharacter(result.id(), result.name(), result.species())
+                    new RickAndMortyCharacter(result.id(), result.name(), result.species(),result.status())
             );
 
         }
@@ -49,7 +49,27 @@ public class RickAndMortyService {
         for (RickAndMortyResult result : Objects.requireNonNull(response).results()){
             if (result.id().equals(id)) {
                 characters.add(
-                        new RickAndMortyCharacter(result.id(), result.name(), result.species())
+                        new RickAndMortyCharacter(result.id(), result.name(), result.species(), result.status())
+                );
+            }
+        }
+        return characters;
+    }
+    public List <RickAndMortyCharacter> findCharactersByStatus(String status){
+        RickAndMortyResponse response = Objects.requireNonNull(
+                        webClient
+                                .get()
+                                .uri("/api/character")
+                                .retrieve()
+                                .toEntity(RickAndMortyResponse.class)
+                                .block()
+                )
+                .getBody();
+        List<RickAndMortyCharacter> characters = new ArrayList<>();
+        for (RickAndMortyResult result : Objects.requireNonNull(response).results()){
+            if (result.status().equals(status)) {
+                characters.add(
+                        new RickAndMortyCharacter(result.id(), result.name(), result.species(), result.status())
                 );
             }
         }

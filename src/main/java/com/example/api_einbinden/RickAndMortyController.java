@@ -19,10 +19,15 @@ public class RickAndMortyController{
 List<RickAndMortyCharacter> findCharacters() {
     return service.findCharacters();
 }
-@GetMapping("/characters/{id}")
+@GetMapping("/characters/id/{id}")
 List<RickAndMortyCharacter> findCharactersById(@PathVariable String id) {
 
     return service.findCharactersById(id);
+}
+@GetMapping("/characters/status/{status}")
+List<RickAndMortyCharacter> findCharactersByStatus(@PathVariable String status) {
+
+    return service.findCharactersByStatus(status);
 }
 
 

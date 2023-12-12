@@ -4,6 +4,7 @@ public record RickAndMortyResult(
 
         String id,
         String name,
-        String species
+        String species,
+        String status
 ) {
 }
